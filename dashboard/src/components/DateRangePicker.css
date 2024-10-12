@@ -1,0 +1,32 @@
+.date-range-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.date-picker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 0 5px; /* Space between inputs */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .date-picker-container {
+    flex-direction: column; /* Stack inputs vertically on smaller screens */
+    align-items: stretch; /* Full width for inputs */
+  }
+
+  .date-input {
+    width: 100%; /* Full width for inputs */
+    margin-bottom: 10px; /* Space between stacked inputs */
+  }
+}
