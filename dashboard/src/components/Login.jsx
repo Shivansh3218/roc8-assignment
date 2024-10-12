@@ -1,7 +1,7 @@
 /* global google */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"; // Import jwt-decode
+import { jwtDecode } from "jwt-decode"; // Import jwt-decode
 import Cookies from "js-cookie"; // Import js-cookie
 
 const Login = ({ onLogin }) => {
@@ -21,9 +21,11 @@ const Login = ({ onLogin }) => {
       const decodedToken = jwtDecode(jwtToken);
       // Store the token in cookies
       Cookies.set("authToken", jwtToken, { expires: 7 }); // Expires in 7 days
+      onLogin(); // Pass decoded token to parent function
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 100);
 
-      onLogin(decodedToken); // Pass decoded token to parent function
-      navigate("/dashboard");
     } catch (error) {
       console.error("Failed to decode token:", error);
     }
@@ -35,6 +37,7 @@ const Login = ({ onLogin }) => {
         "377491839694-jt00eic4nk8jvlmhgg7cnp2rcv0qtsor.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
+
     google?.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
       width: 250,
@@ -64,5 +67,3 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
-
-
