@@ -46,7 +46,7 @@ function App() {
       />
 
       {/* Handle unmatched routes */}
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="/dashboard" element={<Navigate to="/login" />} />
     </Routes>
   );
 }
