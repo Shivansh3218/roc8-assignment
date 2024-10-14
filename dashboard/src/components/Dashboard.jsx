@@ -1,4 +1,3 @@
-// src/components/Dashboard.jsx
 import React, { useState, useEffect } from "react";
 import BarChartComponent from "./BarChartComponent";
 import LineChartComponent from "./LineChartComponent";
@@ -6,12 +5,7 @@ import Filters from "./Filters";
 import DateRangePickerComponent from "./DateRangePickerComponent";
 import { fetchData } from "../api";
 
-const Dashboard = ({
-  ageFilter,
-  setAgeFilter,
-  genderFilter,
-  setGenderFilter,
-}) => {
+const Dashboard = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDateRange, setSelectedDateRange] = useState([
@@ -22,6 +16,11 @@ const Dashboard = ({
     },
   ]);
   const [selectedFeature, setSelectedFeature] = useState(null);
+
+  // Local state for filters
+  const [ageFilter, setAgeFilter] = useState(null);
+  const [genderFilter, setGenderFilter] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -48,8 +47,8 @@ const Dashboard = ({
       const filtered = data.filter((item) => {
         const itemDate = new Date(item.Day);
         return (
-          item.Age === ageFilter &&
-          item.Gender === genderFilter &&
+          (ageFilter === null || item.Age === ageFilter) &&
+          (genderFilter === null || item.Gender === genderFilter) &&
           itemDate >= selectedDateRange[0].startDate &&
           itemDate <= selectedDateRange[0].endDate
         );
@@ -108,7 +107,6 @@ const Dashboard = ({
         handleDateRangeChange={handleDateRangeChange}
       />
 
-      {/* Instruction for clicking on the bar chart */}
       <p className="instruction">
         Click on any bar in the chart to view detailed trends in the line chart.
       </p>

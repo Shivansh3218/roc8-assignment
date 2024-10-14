@@ -11,9 +11,7 @@ function App() {
   const navigate = useNavigate(); // Initialize useNavigate
   const [cookies] = useCookies(["authToken"]); // Check for authToken in cookies
 
-  // Function to handle login and set auth token
   const handleLogin = () => {
-    // Set authToken in cookies or local storage here if needed
     navigate("/dashboard"); // Redirect to dashboard after login
   };
 
@@ -38,14 +36,10 @@ function App() {
           )
         }
       />
-
-      {/* Redirect root path to login or dashboard based on authentication */}
       <Route
         path="/"
         element={<Navigate to={cookies.authToken ? "/dashboard" : "/login"} />}
       />
-
-      {/* Handle unmatched routes */}
       <Route path="/dashboard" element={<Navigate to="/login" />} />
     </Routes>
   );
